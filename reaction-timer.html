@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>reaction timer</title>
+  <style>
+    body {
+      background-color: #ffcee7; /* soft pink */
+      color: #222;
+      font-family: comic sans;
+      text-align: center;
+      padding-top: 100px;
+    }
+    #box {
+      background-color: #e080a3; /* darker pink */
+      width: 300px;
+      margin: 0 auto;
+      padding: 50px;
+      border-radius: 12px;
+      font-size: 24px;
+      transition: background-color 0.3s ease;
+      user-select: none;
+      cursor: default;
+    }
+    .cyan {
+      background-color: #00ffff !important; /* cyan */
+      color: #000;
+      font-weight: bold;
+    }
+    .red {
+      background-color: #ff4d6d !important; /* bright red-pink */
+      color: #fff;
+    }
+    .pink {
+      background-color: #e080a3 !important;
+      color: #222;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <h1>reaction timer ⁀ ⊹ ₊ “ ⸝⸝</h1>
+  <div id="box" class="pink">press space or enter to start !</div>
+  <p id="result"></p>
+
+  <script>
+    const box = document.getElementById('box');
+    const result = document.getElementById('result');
+
+    let waitingForGreen = false;
+    let greenTime = 0;
+    let timeout;
+
+    function startTest() {
+      result.textContent = '';
+      box.textContent = 'wait for cyan...';
+      box.className = 'red';
+      waitingForGreen = true;
+
+      const delay = Math.floor(Math.random() * 3000) + 2000; // 2–5 sec random wait
+      timeout = setTimeout(() => {
+        box.textContent = '★ ⋮ go ! ⸝⸝';
+        box.className = 'cyan';
+        greenTime = performance.now();
+      }, delay);
+    }
+
+    function resetTest(message = ' good job ! press space or enter to try again !') {
+      waitingForGreen = false;
+      clearTimeout(timeout);
+      box.className = 'pink';
+      box.textContent = message;
+      greenTime = 0;
+    }
+
+    document.addEventListener('keydown', (event) => {
+      if (event.code === 'Space' || event.code === 'Enter') {
+        event.preventDefault(); // prevent scrolling on space
+ 
+        if (!waitingForGreen) {
+          startTest();
+        } else {
+          const now = performance.now();
+          if (greenTime === 0) {
+            resetTest('oops, too soon! ');
+            result.textContent = '';
+          } else {
+            const reactionTime = Math.floor(now - greenTime);
+            resetTest();
+            result.innerHTML = `your reaction time is ${reactionTime} ms! good job ! <p>made by lily❤ </p>`;
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

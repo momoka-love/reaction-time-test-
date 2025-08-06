@@ -1,0 +1,36 @@
+body {
+  background-color: #ffcee7; /* soft pink */
+  color: #222;
+  font-family: comic sans;
+  text-align: center;
+  padding-top: 100px;
+}
+#box {
+  background-color: #e080a3; /* darker pink */
+  width: 300px;
+  margin: 0 auto;
+  padding: 50px;
+  border-radius: 12px;
+  font-size: 24px;
+  transition: background-color 0.3s ease;
+  user-select: none;
+  cursor: default;
+}
+.cyan {
+  background-color: #00ffff !important; /* cyan */
+  color: #000;
+  font-weight: bold;
+}
+.red {
+  background-color: #ff4d6d !important; /* bright red-pink */
+  color: #fff;
+}
+.pink {
+  background-color: #e080a3 !important;
+  color: #222;
+}
+#result {
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: 600;
+}
